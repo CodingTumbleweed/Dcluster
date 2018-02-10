@@ -25,7 +25,7 @@ def rhodelta(dist, xxdist, ND, N, percent = 2.0):
     maxd = dist.max()
     ordrho = (-rho).argsort()
     delta = np.zeros(ND)
-    nneigh = np.zeros(ND)
+    nneigh = np.zeros(ND, dtype=int)
     delta[ordrho[0]] = -1
     nneigh[ordrho[0]] = 0
 

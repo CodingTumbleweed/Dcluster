@@ -40,9 +40,9 @@ def DCplot(dist, XY, ND, rho, delta,ordrho,dc,nneigh, rhomin,deltamin):
             deltamin = event.ydata
             print('Cutoff: (min_rho, min_delta): (%.2f, %.2f)' %(rhomin,deltamin))
             NCLUST = 0
-            cl = np.zeros(ND)-1
+            cl = np.zeros(ND, dtype=int)-1
             # 1000 is the max number of clusters
-            icl = np.zeros(1000)
+            icl = np.zeros(1000, dtype=int)
             for i in range(ND):
                 if rho[i]>rhomin and delta[i]>deltamin:
                     cl[i] = NCLUST
