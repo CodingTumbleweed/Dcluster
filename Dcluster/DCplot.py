@@ -98,8 +98,9 @@ def DCplot(dist, XY, ND, rho, delta,ordrho,dc,nneigh, rhomin,deltamin):
             print('\n\nDrag the mouse pointer at a cutoff position in figure DECISION GRAPH and press   OR   Press key n to quit')
             ################# plot the data points with cluster labels
             cmap = cm.rainbow(np.linspace(0, 1, NCLUST))
-            plot2(axarr,rho, delta,cmap,cl,icl,XY,NCLUST)
-            f.show()
+            if max(cl) != -1:
+                plot2(axarr, rho, delta, cmap, cl, icl, XY, NCLUST)
+                f.show()
             return()
 
     
