@@ -10,19 +10,19 @@ except NameError:
 def plot1(rho, delta):
     f, axarr = plt.subplots(1,3)
     axarr[0].set_title('DECISION GRAPH')
-    axarr[0].scatter(rho, delta, alpha=0.6,c='white')
+    axarr[0].scatter(rho, delta, alpha=0.6,c='black')
     axarr[0].set_xlabel(r'$\rho$')
     axarr[0].set_ylabel(r'$\delta$')
     axarr[1].set_title('DECISION GRAPH 2')
-    axarr[1].scatter(np.arange(len(rho))+1, -np.sort(-rho*delta), alpha=0.6,c='white')
+    axarr[1].scatter(np.arange(len(rho))+1, -np.sort(-rho*delta), alpha=0.6,c='black')
     axarr[1].set_xlabel('Sorted Sample')
     axarr[1].set_ylabel(r'$\rho*\delta$')
     return(f,axarr)
 
 
 def plot2(axarr,rho, delta,cmap,cl,icl,XY,NCLUST):
-    axarr[0].scatter(rho, delta, alpha=1,c='white')
-    axarr[1].scatter(np.arange(len(rho))+1, -np.sort(-rho*delta), alpha=1,c='white')
+    axarr[0].scatter(rho, delta, alpha=1,c='black')
+    axarr[1].scatter(np.arange(len(rho))+1, -np.sort(-rho*delta), alpha=1,c='black')
     for i in range(NCLUST):
         axarr[0].scatter(rho[icl[i]], delta[icl[i]], alpha=0.8, c=cmap[i])
         axarr[1].scatter(i+1, rho[icl[i]]*delta[icl[i]], alpha=0.8,c=cmap[i])
