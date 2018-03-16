@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
+from matplotlib.widgets import Button
 
 try:
    input = raw_input
@@ -34,6 +35,9 @@ def plot2(axarr,rho, delta,cmap,cl,icl,XY,NCLUST):
 def DCplot(dist, XY, ND, rho, delta,ordrho,dc,nneigh, rhomin,deltamin):
     f, axarr = plot1(rho, delta)
     def onclick(event):
+        if event.inaxes == axes_save:
+            btn_CallBack(event)
+            return()
         global rhomin, deltamin
         if event.xdata != None and event.ydata != None:
             rhomin = event.xdata
@@ -95,7 +99,7 @@ def DCplot(dist, XY, ND, rho, delta,ordrho,dc,nneigh, rhomin,deltamin):
             clusters = np.array([np.arange(ND)+1,cl+1,halo+1]).T
             np.savetxt('CLUSTER_ASSIGNATION_%.2f_%.2f_.txt'%(rhomin,deltamin),clusters,fmt='%d\t%d\t%d')
             print('Result are saved in file CLUSTER_ASSIGNATION_%.2f_%.2f_.txt'%(rhomin,deltamin))
-            print('\n\nDrag the mouse pointer at a cutoff position in figure DECISION GRAPH and press   OR   Press key n to quit')
+            print('\n\nClick the mouse pointer at a cutoff position in figure 1')
             ################# plot the data points with cluster labels
             cmap = cm.rainbow(np.linspace(0, 1, NCLUST))
             if max(cl) != -1:
@@ -103,17 +107,14 @@ def DCplot(dist, XY, ND, rho, delta,ordrho,dc,nneigh, rhomin,deltamin):
                 f.show()
             return()
 
-    
-    while 1:                
-        print('\n\nDrag the mouse pointer at a cutoff position in figure DECISION GRAPH and press   OR   Press key n to quit')
-        cid = f.canvas.mpl_connect('button_press_event', onclick)
-        f.show()
-        nID = input()
-        if nID=='n':
-            f.canvas.mpl_disconnect(cid)
-            print('Saving the figure in file CLUSTER_ASSIGNATION.png')
-            figure = plt.gcf() # get current figure
-            figure.set_size_inches(24, 8)
-            figure.savefig('CLUSTER_ASSIGNATION.png', dpi=300)
-            break
+    def btn_CallBack(event):
+        f.canvas.mpl_disconnect(cid)
+        print('Saving the figure in file CLUSTER_ASSIGNATION.png')
+        figure = plt.gcf()  # get current figure
+        figure.set_size_inches(24, 8)
+        figure.savefig('CLUSTER_ASSIGNATION.png', dpi=300)
 
+    axes_save = plt.axes([0.01, 0.9, 0.1, 0.075])
+    btn_save = Button(axes_save, 'Save', color='lime')
+    cid = f.canvas.mpl_connect('button_press_event', onclick)
+    plt.show()
