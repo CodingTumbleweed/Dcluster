@@ -39,6 +39,10 @@ Author: Guipeng Li
 
 Email:  guipeng.lee(AT)gmail.com
 
+Branch Author: Usman Akram
+
+Email: usman.akram.se(AT)gmail.com
+
 
 References
 --------
